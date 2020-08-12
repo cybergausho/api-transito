@@ -44,7 +44,10 @@ $cortes = json_decode($json, true); //decodificar el json a array
 
     <?php
     //echo count($cortes);
-    //var_dump($cortes);
+    $latitud=array();
+    $longitud=array();
+
+
     for ($i = 0; $i <= count($cortes); $i++) {
         echo "Tipo de corte: " . $cortes["incidents"][$i]["type"] . "<br>";
         echo "Descripcion del corte: " . $cortes["incidents"][$i]["description"] . "<br>";
@@ -55,9 +58,9 @@ $cortes = json_decode($json, true); //decodificar el json a array
             //   var_dump($cortes["incidents"][$i]["location"]["polyline"]);
 
             $ubicacion = explode(" ", $location);  //corto el string por espacios - separa latitud y longitud 
-            $latitud = $ubicacion[0];
-            $longitud = $ubicacion[1];
-            echo "Ubicacion del corte: <br> Latitud" . $latitud . "<br> Longitud" . $longitud . "<br>";
+            $latitud[$i] = $ubicacion[0];
+            $longitud[$i] = $ubicacion[1];
+            echo "Ubicacion del corte: <br> Latitud" . $latitud[$i] . "<br> Longitud" . $longitud[$i] . "<br>";
 
     ?>
             <script>
@@ -72,27 +75,24 @@ $cortes = json_decode($json, true); //decodificar el json a array
         }
         echo "<br><br>";
     }
-
+var_dump($longitud);
+var_dump($latitud);
     ?>
-    <script>
-
-    </script>
     <div id="mapa" style="height:315px;"></div>
 
 </body>
 <script type="text/javascript">
     $(document).ready(function() {
         var marcador = [
-            <?php echo $latitud ?>,
-            <?php echo $longitud ?>
+            <?php echo $latitud[0] ?>,
+            <?php echo $longitud[0] ?>,
+            "CORTE BA", "CORTE BA", "CORTE BA"
         ]
         console.log(marcador)
-        console.log(marcador[1])
-        
+
         $("#mapa").argenmap()
         $("#mapa").centro(-34.63, -58.52).zoom(13)
         $("#mapa").agregarMarcador(marcador)
-
 
 
     });
