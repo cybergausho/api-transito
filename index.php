@@ -85,8 +85,7 @@ var_dump($latitud);
     $(document).ready(function() {
         var marcador = [
             <?php echo $latitud[0] ?>,
-            <?php echo $longitud[0] ?>,
-            "CORTE BA", "CORTE BA", "CORTE BA"
+            <?php echo $longitud[0] ?>
         ]
         console.log(marcador)
 
